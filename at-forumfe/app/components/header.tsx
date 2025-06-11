@@ -15,7 +15,7 @@ export default function Header() {
 
             <nav className="hidden md:flex">
               <Link href="/" className="nav-link">Home</Link>
-              <Link href="/project" className="nav-link">Project</Link>
+              <Link href="../page/project" className="nav-link">Project</Link>
               <Link href="/contact" className="nav-link">Contact</Link>
               <Link href="/more" className="nav-link">More</Link>
             </nav>
