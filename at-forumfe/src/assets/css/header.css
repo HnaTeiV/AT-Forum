@@ -54,6 +54,7 @@
   background-color: #000000; /* bg-gray-200 */
   border-radius: 9999px;
   transition: background-color 0.2s ease;
+  color: white;
 }
 
 .signup-btn:hover {
