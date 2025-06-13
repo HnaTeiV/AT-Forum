@@ -1,0 +1,42 @@
+*{
+    box-sizing: border-box;
+}
+.item-container {
+  width: 70%;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.item {
+  flex: 1 1 calc(33.333% - 20px);
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  padding: 2vh;
+  min-width: 250px;
+  max-width: 300px;
+  text-align: center;
+  background-color: #f9f9f9;
+  height: 40vh; /* Fixed height in vh */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* Consistent height using vh units */
+.item h2 {
+  min-height: 4vh;
+  margin:0 0;
+}
+
+.item p {
+  min-height: 5vh;
+  margin:2vh 0 2vh 0;
+}
+
+.item h5 {
+  min-height: 4vh;
+  margin:0 0;
+}
