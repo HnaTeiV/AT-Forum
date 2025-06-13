@@ -27,11 +27,11 @@ async function addPost(post) {
   try {
     const newPost = new Post({
       threadId: post.threadId,
-      userId: post.userId,
+      author: post.userId,
       content: post.content,
       createdAt: new Date(),
       isDeleted: false,
-      likes: [],
+      likes: 0,
     });
     return await newPost.save();
   } catch (error) {
@@ -48,7 +48,7 @@ async function updatePost(post) {
         content: post.content,
         updateAt: new Date(),
         isDeleted: post.isDeleted || false,
-        likes: post.likes || [],
+        likes: post.likes || 0,
       },
       { new: true }
     ).then((updatedPost) => {

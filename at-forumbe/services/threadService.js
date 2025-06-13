@@ -3,8 +3,8 @@ const Thread = require('../models/Thread');
 async function getAllThreads() {
   try {
     return await Thread.find()
-      .populate('categoryId', 'name')
-      .populate('userId', 'username')
+      .populate('category', 'name')     // <-- correct field
+      .populate('owner', 'username')    // <-- correct field
       .sort({ createdAt: -1 });
   } catch (error) {
     console.error("Error fetching threads:", error);

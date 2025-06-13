@@ -21,11 +21,7 @@ export default function Footer() {
               Email<br />
               <input type="email" name="email" placeholder="Your email" />
             </label><br />
-            <label>
-              Message<br />
-              <textarea name="message" placeholder="Your message" rows="4" />
-            </label><br />
-            <button type="submit">Send</button>
+            
           </form>
         </div>
 
@@ -36,6 +32,11 @@ export default function Footer() {
           <p>Phone: +1 234 567 890</p>
           <p>Email: contact@yourdomain.com</p>
           <p>&copy; 2025 Your Company. All rights reserved.</p>
+          <label>
+              Message<br />
+              <textarea name="message" placeholder="Your message" rows="4" />
+            </label><br />
+            <button type="submit">Send</button>
         </div>
       </div>
     </footer>
