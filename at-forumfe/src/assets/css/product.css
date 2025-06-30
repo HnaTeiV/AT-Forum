@@ -1,15 +1,75 @@
 
+.Wikipedia {
+  --background-color1:#000000;
+  --background-color2:#000000;
+  --text-color: #fff;
+  --status-color: #2e2d2f;
+}
+.Amazon {
+  --background-color1: #ffffff;
+  --background-color2:#ffffff;
+  --text-color: #ff6600;
+  --status-color: #161d27;
+}
+.Yahoo {
+  --background-color1: #7349f7;
+  --background-color2:  #6001d2;
+  --text-color:#eecbff;
+  --status-color: #000000;
+}
+.TikTok {
+  --background-color1:#000000;
+  --background-color2:#000000;
+  --text-color: #fff;
+  --status-color:#fc2b54;
+}
+.Baidu {
+  --background-color1:#ffffff;
+  --background-color2:#ffffff;
+  --text-color: #4379f7;
+  --status-color: #000000;
+}
+.Google {
+  --background-color1:#ffffff;
+  --background-color2:#ffffff;
+  --text-color: #000000;
+  --status-color: #e94433;
+}
+.YouTube {
+  --background-color1:#ffffff;
+  --background-color2:#ffffff;
+  --text-color: #fc2b54;
+}
+.Facebook {
+  --background-color1:#ffffff;
+  --background-color2:#ffffff;
+  --text-color: rgb(0, 0, 0);
+  --status-color: #000000;
+}
+.Instagram {
+  --background-color1:#a008f4;
+  --background-color2:#fc068c;
+  --text-color: rgba(129, 6, 119, 255);
+  --status-color: #000000;
+}
+.Twitter {
+  --background-color1:#ffffff;
+  --background-color2:#ffffff;
+  --text-color: #1ca1f1;
+  --status-color: #000000;
+}
 .productGridContainer {
   display: grid;
   grid-template-columns: repeat(3, 1fr); /* 3 cột */
   gap: 20px;
   padding: 20px;
 }
-
+.projectsContainer{
+  margin: 0 20%;
+}
 .productContainer {
   border: 1px solid #ccc;
   border-radius: 8px;
-  overflow: hidden;
   background-color: #fff;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease;
@@ -21,28 +81,58 @@
 
 .productImageContainer img {
   width: 100%;
-  height: 200px;
+  height: 100%;
   object-fit: cover;
+  position:relative;
+  z-index: 1;
+}
+
+
+.productGridContainer > *{
+  color:var(--text-color);
+}
+
+.productImageContainer{
+    position: relative;
+    transition: filter 0.3s ease;
+    filter:brightness(100%)
+}
+
+.detailBtn{
+  top:0;
+  padding:0;
+  z-index: 2;
+  margin:0 0;
+  width: 100%;
+  opacity: 0.1;
+  background-color: black;
+  border:none;
+  height:100%;
+  border-radius: 0%;
+  position: absolute;
+  
 }
 
 .productContentContainer {
+ opacity: 0;
+  pointer-events: none;     /* Prevent interaction while hidden */
+  width: 100%;
   padding: 16px;
+  transition: opacity 0.5s ease-in-out 0.3s; /* 0.3s delay before fading in */
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(255, 255, 255, 0);
+  z-index: 3;
+  
+}
+.detailBtn:hover + .productContentContainer {
+  opacity: 1;
+  pointer-events: auto;
+  transition-delay: 0s; /* Show immediately when hovered */
+
 }
 
-.productContentContainer h2 {
-  font-size: 18px;
-  margin-bottom: 8px;
+.productContainer:hover .productImageContainer img {
+  filter: brightness(130%);
 }
-
-.productContentContainer h3,
-.productContentContainer h5,
-.productContentContainer p {
-  margin: 4px 0;
-  color: #555;
-}
-=======
-.productImageContainer-container{
-    width:40rem;
-    height:50rem;
-}
-

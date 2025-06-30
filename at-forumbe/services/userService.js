@@ -26,6 +26,8 @@ async function getUserByUserName(username) {
 async function addUser(user) {
   try {
     const newUser = new User({
+      firstName:user.firstName,
+      lastName:user.lastName,
       username: user.username,
       email: user.email,
       passwordHash: user.passwordHash,

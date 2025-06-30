@@ -3,11 +3,6 @@ import { Routes, Route } from "react-router-dom";
 import Home from "../pages/Home";
 
 import ProjectDetail from "../pages/ProjectDetail";
-import Contact from "../pages/Contact";
-import More from "../pages/More";
-import Layout from "../components/layout";
-import Project from "../pages/Project";
-
 import Project from "../pages/Project";
 import Contact from "../pages/Contact";
 import More from "../pages/More";

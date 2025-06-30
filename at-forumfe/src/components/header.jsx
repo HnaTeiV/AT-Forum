@@ -5,7 +5,6 @@ import { FaSearch } from "react-icons/fa";
 
 import { useFetch, useSearchData } from "../hooks/fetchData";
 
-import { useFetch } from "../hooks/fetchData";
 
 import "../assets/css/header.css";
 
@@ -33,7 +32,6 @@ const Header = () => {
 
     const listItem=listItemRef.current;
 
-    const listItem = listItemRef.current;
 
     if (!listItem) return;
     if (filteredData.length === 0) {
@@ -56,15 +54,15 @@ const Header = () => {
   useEffect(() => {
     if (data && data.length > 0) {
       if (!listItemRef) return;
-
-      if(keyword){
-
       if (keyword) {
-
         filterAndRender(keyword);
+      } else {
+        if (listItemRef.current) {
+          listItemRef.current.innerHTML = "";
+        }
       }
     }
-  }, [keyword]);
+  }, [keyword, data]);
 
   return (
     <header className="header">
