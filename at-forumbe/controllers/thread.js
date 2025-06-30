@@ -1,5 +1,14 @@
 const threadService = require('../services/threadService');
 
+async function getTopThreads(req, res) { //new  
+  try {
+    const threads = await threadService.getTopThreads(); // gọi từ service
+    res.json(threads);
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to fetch top threads' });
+  }
+}
+
 async function getAllThreads(req, res) {
   try {
     const threads = await threadService.getAllThreads();
@@ -63,4 +72,5 @@ module.exports = {
   addThread,
   updateThread,
   deleteThread,
+  getTopThreads,
 };

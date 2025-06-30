@@ -6,7 +6,11 @@ import gsap from 'gsap';
 import { useGSAP } from "@gsap/react";
 import { useRef } from "react";
 export default function Home() {
+
+  const data = useFetch("http://localhost:5000/api/thread/top-threads");
+
   const data = useFetch("http://localhost:5000/api/thread");
+
   const container=useRef(null);
   useEffect(() => {
     // Optional side-effects here
