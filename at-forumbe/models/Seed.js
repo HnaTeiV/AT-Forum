@@ -116,7 +116,9 @@ async function seed() {
         status: "published",
         tags: ["search", "engine"],
         image: "assets/image/Google.png",
+
         views: 5555,
+
       },
       {
         title: "YouTube",
@@ -127,7 +129,9 @@ async function seed() {
         status: "published",
         tags: ["video", "entertainment"],
         image: "assets/image/YouTube.png",
+
         views: 599484,
+
       },
       {
         title: "Facebook",
@@ -138,7 +142,9 @@ async function seed() {
         status: "published",
         tags: ["social", "networking"],
         image: "assets/image/Facebook.png",
+
         views: 599424,     
+
       },
       {
         title: "Instagram",
@@ -149,7 +155,9 @@ async function seed() {
         status: "published",
         tags: ["photos", "sharing"],
         image: "assets/image/Instagram.png",
+
         views: 59942,
+
       },
       {
         title: "Twitter",
@@ -190,6 +198,7 @@ async function seed() {
         status: "published",
         tags: ["portal", "email"],
         image: "assets/image/Yahoo.png",
+
       },
       {
         title: "TikTok",
