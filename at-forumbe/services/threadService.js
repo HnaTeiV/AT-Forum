@@ -75,6 +75,19 @@ async function deleteThread(id) {
     throw error;
   }
 }
+//new
+async function getTopThreads() {
+  try {
+    return await Thread.find()
+      .sort({ views: -1 })  // sắp xếp theo lượt xem giảm dần
+      .limit(4)
+      .populate('category', 'name')
+      .populate('owner', 'username');
+  } catch (error) {
+    console.error("Error fetching top threads:", error);
+    throw error;
+  }
+}
 
 module.exports = {
   getAllThreads,
@@ -82,4 +95,5 @@ module.exports = {
   addThread,
   updateThread,
   deleteThread,
+  getTopThreads,
 };
