@@ -5,7 +5,6 @@ const threadController = require('../controllers/thread');
 router.get('/', threadController.getAllThreads);
 
 router.get('/top-threads', threadController.getTopThreads); //new
-=======
 
 router.get('/:keyword', threadController.getThreadByKeyword);
 router.post('/', threadController.addThread);

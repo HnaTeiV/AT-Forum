@@ -19,7 +19,7 @@ export default function SignUp() {
   const handleSubmit = (e) => {
     e.preventDefault(); // prevent page reload
     console.log("Form Submitted:", formData);
-    // You could send formData to your backend here
+    
   };
 
   return (
