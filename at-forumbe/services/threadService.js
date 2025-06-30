@@ -3,8 +3,8 @@ const Thread = require('../models/Thread');
 async function getAllThreads() {
   try {
     return await Thread.find()
-      .populate('categoryId', 'name')
-      .populate('userId', 'username')
+      .populate('category', 'name')     // <-- correct field
+      .populate('owner', 'username')    // <-- correct field
       .sort({ createdAt: -1 });
   } catch (error) {
     console.error("Error fetching threads:", error);
@@ -12,13 +12,12 @@ async function getAllThreads() {
   }
 }
 
-async function getThreadById(id) {
+async function getThreadByKeyword(keyword) {
   try {
-    return await Thread.findById(id)
-      .populate('categoryId', 'name')
-      .populate('userId', 'username');
+    const thread = await Thread.findOne({ title: { $regex: keyword, $options: 'i' } });
+    return thread;
   } catch (error) {
-    console.error("Error fetching thread by id:", error);
+    console.error("Error fetching thread by keyword:", error);
     throw error;
   }
 }
@@ -76,11 +75,25 @@ async function deleteThread(id) {
     throw error;
   }
 }
+//new
+async function getTopThreads() {
+  try {
+    return await Thread.find()
+      .sort({ views: -1 })  // sắp xếp theo lượt xem giảm dần
+      .limit(4)
+      .populate('category', 'name')
+      .populate('owner', 'username');
+  } catch (error) {
+    console.error("Error fetching top threads:", error);
+    throw error;
+  }
+}
 
 module.exports = {
   getAllThreads,
-  getThreadById,
+  getThreadByKeyword,
   addThread,
   updateThread,
   deleteThread,
+  getTopThreads,
 };
