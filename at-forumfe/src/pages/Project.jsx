@@ -1,53 +1,63 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+
+import "../assets/css/product.css";
 
 export default function Project() {
-  const [posts, setPosts] = useState([]);
+  const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const navigate = useNavigate();
+
 
   useEffect(() => {
-    fetch('http://localhost:5000/api/post')
-      .then((res) => {
-        if (!res.ok) {
-          throw new Error('Network response was not ok');
-        }
-        return res.json();
-      })
+    fetch("http://localhost:5000/api/thread/")
+      .then((res) => res.json())
       .then((data) => {
-        setPosts(data);
+        setProjects(data);
         setLoading(false);
       })
       .catch((err) => {
-        console.error('Failed to fetch posts:', err);
-        setError('Failed to load posts.');
+        console.error("Error fetching projects:", err);
         setLoading(false);
       });
   }, []);
 
   return (
-    <main className="p-6 max-w-6xl mx-auto">
-      <h1 className="text-3xl font-bold mb-6">Forum Posts</h1>
+    <>
+      <h1>All Projects</h1>
 
-      {loading && <p>Loading posts...</p>}
-      {error && <p className="text-red-500">{error}</p>}
+      {loading ? (
+        <p>Loading...</p>
+      ) : projects.length > 0 ? (
+<div className="productGridContainer">
+  {projects.map((item) => (
 
-      <div className="space-y-4">
-        {posts.map((post) => (
-          <div key={post._id} className="border p-4 rounded-md shadow-sm">
-            <h2 className="text-xl font-semibold mb-1">
-              {post.threadId?.title || 'No Title'}
-            </h2>
-            <p className="text-gray-700 mb-2">{post.content}</p>
-            <div className="text-sm text-gray-500">
-              By{' '}
-              <span className="font-medium">
-                {post.userId?.username || 'Anonymous'}
-              </span>{' '}
-              on {new Date(post.createdAt).toLocaleString()}
-            </div>
-          </div>
-        ))}
+    <div className="productContainer" key={item._id}
+  onClick={() => navigate(`/project/${encodeURIComponent(item.title)}`)}
+  style={{ cursor: "pointer" }}>
+      <div className="productImageContainer">
+        <img
+          src={item.image ? `/${item.image}` : "/placeholder.jpg"}
+          alt={item.title}
+        />
       </div>
-    </main>
+      <div className="productContentContainer">
+        <h2>{item.title}</h2>
+        {item.url && <h3 className="urlData">{item.url}</h3>}
+        <p className="contentData">{item.description}</p>
+        {item.tags && (
+          <h5 className="tagsData">{item.tags.join(", ")}</h5>
+        )}
+        <h5 className="statusData">{item.status}</h5>
+        <h5 className="viewsData">{item.views} views</h5>
+      </div>
+    </div>
+  ))}
+</div>
+
+      ) : (
+        <p>No projects found.</p>
+      )}
+    </>
   );
 }
