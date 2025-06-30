@@ -6,6 +6,7 @@ const userSchema=new mongoose.Schema({
     role:{type:String,enum:['admin','moderator','member'],default:'member'},
     isBanned:{type:Boolean,default:false},
     createdAt:{type:Date,default:Date.now},
-    lastLogin:{type:Date}
+    lastLogin:{type:Date},
+    
 });
 module.exports=mongoose.model('User',userSchema);

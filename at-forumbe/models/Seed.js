@@ -116,6 +116,7 @@ async function seed() {
         status: "published",
         tags: ["search", "engine"],
         image: "assets/image/Google.png",
+        
       },
       {
         title: "YouTube",
@@ -186,6 +187,7 @@ async function seed() {
         status: "published",
         tags: ["portal", "email"],
         image: "assets/image/Yahoo.png",
+        
       },
       {
         title: "TikTok",

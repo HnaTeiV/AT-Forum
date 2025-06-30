@@ -2,7 +2,7 @@ import React from "react";
 import { useState, useEffect, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FaSearch } from "react-icons/fa";
-import { useFetch, useSearchData } from "../hooks/fetchData";
+import { useFetch } from "../hooks/fetchData";
 import "../assets/css/header.css";
 
 const Header = () => {
@@ -26,7 +26,7 @@ const Header = () => {
     const filteredData = data.filter((item) =>
       item.title.toLowerCase().includes(searchValue.toLowerCase())
     );
-    const listItem=listItemRef.current;
+    const listItem = listItemRef.current;
     if (!listItem) return;
     if (filteredData.length === 0) {
       listItem.innerHTML = `<li class="list-item">No results found</li>`;
@@ -48,7 +48,7 @@ const Header = () => {
   useEffect(() => {
     if (data && data.length > 0) {
       if (!listItemRef) return;
-      if(keyword){
+      if (keyword) {
         filterAndRender(keyword);
       }
     }
@@ -110,7 +110,9 @@ const Header = () => {
             />
             <ul className="listItemSearch" ref={listItemRef}></ul>
           </div>
-          <button className="signup-btn">Sign up</button>
+          <button onClick={()=>navigate("/Signup")} className="signup-btn">
+            Sign up
+          </button>
         </div>
       </div>
     </header>
