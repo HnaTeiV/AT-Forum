@@ -6,6 +6,8 @@
   margin: 0 auto;
   display: flex;
   flex-wrap: wrap;
+  margin-top:5rem;
+  margin-bottom:5rem;
   gap: 20px;
   justify-content: center;
 }
@@ -15,11 +17,11 @@
   box-sizing: border-box;
   border: 1px solid #ccc;
   padding: 2vh;
-  min-width: 250px;
-  max-width: 300px;
+  min-width: 30rem;
+  max-width: 30rem;
   text-align: center;
   background-color: #f9f9f9;
-  height: 40vh; /* Fixed height in vh */
+  height: 40rem; /* Fixed height in vh */
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -39,4 +41,5 @@
 .item h5 {
   min-height: 4vh;
   margin:0 0;
+  color:green;
 }

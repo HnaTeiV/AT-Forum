@@ -115,6 +115,7 @@ async function seed() {
         category: categoryMap["Search Engines"],
         status: "published",
         tags: ["search", "engine"],
+        image: "assets/image/Google.png",
       },
       {
         title: "YouTube",
@@ -124,6 +125,7 @@ async function seed() {
         category: categoryMap["Video Platforms"],
         status: "published",
         tags: ["video", "entertainment"],
+        image: "assets/image/YouTube.png",
       },
       {
         title: "Facebook",
@@ -133,6 +135,7 @@ async function seed() {
         category: categoryMap["Social Media"],
         status: "published",
         tags: ["social", "networking"],
+        image: "assets/image/Facebook.png",
       },
       {
         title: "Instagram",
@@ -142,6 +145,7 @@ async function seed() {
         category: categoryMap["Social Media"],
         status: "published",
         tags: ["photos", "sharing"],
+        image: "assets/image/Instagram.png",
       },
       {
         title: "Twitter",
@@ -151,6 +155,7 @@ async function seed() {
         category: categoryMap["Social Media"],
         status: "published",
         tags: ["news", "tweets"],
+        image: "assets/image/Twitter.png",
       },
       {
         title: "Wikipedia",
@@ -160,6 +165,7 @@ async function seed() {
         category: categoryMap["Information"],
         status: "published",
         tags: ["education", "facts"],
+        image: "assets/image/Wikipedia.png",
       },
       {
         title: "Amazon",
@@ -169,6 +175,7 @@ async function seed() {
         category: categoryMap["E-commerce"],
         status: "published",
         tags: ["shopping", "store"],
+        image: "assets/image/Amazon.png",
       },
       {
         title: "Yahoo",
@@ -178,6 +185,7 @@ async function seed() {
         category: categoryMap["Information"],
         status: "published",
         tags: ["portal", "email"],
+        image: "assets/image/Yahoo.png",
       },
       {
         title: "TikTok",
@@ -187,6 +195,7 @@ async function seed() {
         category: categoryMap["Video Platforms"],
         status: "published",
         tags: ["shorts", "viral"],
+        image: "assets/image/TikTok.png",
       },
       {
         title: "Baidu",
@@ -196,6 +205,7 @@ async function seed() {
         category: categoryMap["Search Engines"],
         status: "published",
         tags: ["search", "china"],
+        image: "assets/image/Baidu.png",
       },
     ]);
 
@@ -214,7 +224,7 @@ async function seed() {
       createdAt: { type: Date, default: Date.now },
       editAt: { type: Date },
       isDeleted: { type: Boolean, default: false },
-      likes:{type:Int16Array,default:0}
+      likes: { type: Int16Array, default: 0 },
     });
 
     console.log("✅ Sample data inserted successfully!");

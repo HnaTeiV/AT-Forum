@@ -1,6 +1,5 @@
 /* Header container */
 .header {
-  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
@@ -59,4 +58,25 @@
 
 .signup-btn:hover {
   background-color: #999999; /* bg-gray-300 */
+}
+
+.listItemSearch{
+  position: absolute;
+  list-style-type: none;
+  width: 100%;
+}
+.listItemSearch li> a {
+  display:block;
+  padding: 0.5rem;
+  background-color: white;
+  border-bottom: 1px solid #e5e7eb;
+  color:#000000;
+  text-decoration: none;
+  transition: background-color 0.2s ease;
+
+}
+.listItemSearch li> a:hover {
+  background-color: #f3f4f6; /* bg-gray-100 */
+  font-weight: bolder;
+  font-size: larger;
 }

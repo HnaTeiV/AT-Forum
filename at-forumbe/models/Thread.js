@@ -15,6 +15,7 @@ const threadSchema = new mongoose.Schema({
     enum: ["draft", "published", "archived"],
     default: "draft",
   },
+  image:{type:String,default:""},
   tags: [{ type: String }],
   views: { type: Number, default: 0 },
   createdAt: { type: Date, default: Date.now },
