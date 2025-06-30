@@ -12,13 +12,12 @@ async function getAllThreads() {
   }
 }
 
-async function getThreadById(id) {
+async function getThreadByKeyword(keyword) {
   try {
-    return await Thread.findById(id)
-      .populate('categoryId', 'name')
-      .populate('userId', 'username');
+    const thread = await Thread.findOne({ title: { $regex: keyword, $options: 'i' } });
+    return thread;
   } catch (error) {
-    console.error("Error fetching thread by id:", error);
+    console.error("Error fetching thread by keyword:", error);
     throw error;
   }
 }
@@ -79,7 +78,7 @@ async function deleteThread(id) {
 
 module.exports = {
   getAllThreads,
-  getThreadById,
+  getThreadByKeyword,
   addThread,
   updateThread,
   deleteThread,

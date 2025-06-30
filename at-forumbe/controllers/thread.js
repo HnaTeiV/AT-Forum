@@ -9,9 +9,11 @@ async function getAllThreads(req, res) {
   }
 }
 
-async function getThreadById(req, res) {
+async function getThreadByKeyword(req, res) {
   try {
-    const thread = await threadService.getThreadById(req.params.id);
+    const keyword = req.params.keyword;
+    console.log(keyword);
+    const thread = await threadService.getThreadByKeyword(keyword);
     if (!thread) {
       return res.status(404).json({ message: 'Thread not found' });
     }
@@ -57,7 +59,7 @@ async function deleteThread(req, res) {
 
 module.exports = {
   getAllThreads,
-  getThreadById,
+  getThreadByKeyword,
   addThread,
   updateThread,
   deleteThread,
