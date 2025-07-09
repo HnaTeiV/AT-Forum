@@ -68,4 +68,30 @@ const login = (url) => {
     }
   };
 };
-export { useFetch, useSearchData, useRegisterUser, login };
+const updateProfile = (url) => {
+  return async (userData) => {
+    const formData = new FormData();
+
+    for (const key in userData) {
+      if (userData[key] !== null) {
+        formData.append(key, userData[key]);
+      }
+    }
+    console.log("🔍 FormData before sending:");
+    for (let [key, value] of formData.entries()) {
+      if (value instanceof File) {
+        console.log(`${key}: File -`, value.name);
+      } else {
+        console.log(`${key}:`, value);
+      }
+    }
+    const res = await fetch(url, {
+      method: "PUT",
+      body: formData,
+    });
+
+    const data = await res.json();
+    return data.message || "Profile updated!";
+  };
+};
+export { useFetch, useSearchData, useRegisterUser, login, updateProfile };

@@ -16,7 +16,6 @@ export async function fetchProfile(setUser, setError,setMessage) {
     });
 
     const data = await res.json();
-    console.log(data);
     if (res.ok) {
       setUser(data.user);
       setMessage(data.message);
@@ -24,7 +23,6 @@ export async function fetchProfile(setUser, setError,setMessage) {
       setError(data.message || "Failed to fetch profile");
     }
   } catch (err) {
-    console.error(err);
     setError("An error occurred while fetching profile.");
   }
 }
