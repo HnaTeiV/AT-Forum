@@ -6,10 +6,21 @@ const threadRoutes = require('./routes/thread');
 const postRoutes=require('./routes/post');
 const app = express();
 
-app.use(cors());             // Allow cross-origin requests
+app.use(cors({
+  origin: "http://localhost:3000",
+  credentials: true,
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+  exposedHeaders: ["Authorization"]
+}));   // Allow cross-origin requests
 app.use(express.json());     // Parse JSON request bodies
-
-
+app.use(express.urlencoded({ extended: true }));
+// app.use((req, res, next) => {
+//   console.log("=== HEADERS ===");
+//   console.log(req.headers);
+//   // console.log("Authorization header:", req.headers.authorization);
+//   next();
+// });
 //Routes
 app.use('/api/user',userRoutes);
 app.use('/api/category',categoryRoutes);
@@ -22,8 +33,5 @@ app.get('/', (req, res) => {
   res.send('Forum API is running...');
 });
 app.use('/api/categories', categoryRoutes);
-// Import and use route files
-// const postRoutes = require('./routes/posts');
-// app.use('/api/posts', postRoutes);
 
 module.exports = app;
