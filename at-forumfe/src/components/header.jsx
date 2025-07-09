@@ -2,10 +2,9 @@ import React from "react";
 import { useState, useEffect, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FaSearch } from "react-icons/fa";
-
+import {Login} from "../components/login";
 import { useFetch, useSearchData } from "../hooks/fetchData";
 
-import { useFetch } from "../hooks/fetchData";
 
 import "../assets/css/header.css";
 
@@ -14,6 +13,7 @@ const Header = () => {
   const data = useFetch("http://localhost:5000/api/thread");
   const listItemRef = useRef(null);
   const navigate = useNavigate();
+  const [isLogin,setIsLogin]=useState(false);
   const onKeyDown = (e) => {
     if (e.key === "Enter") {
       // Handle search logic here, e.g., redirect to search results page
@@ -33,7 +33,6 @@ const Header = () => {
 
     const listItem=listItemRef.current;
 
-    const listItem = listItemRef.current;
 
     if (!listItem) return;
     if (filteredData.length === 0) {
@@ -56,15 +55,15 @@ const Header = () => {
   useEffect(() => {
     if (data && data.length > 0) {
       if (!listItemRef) return;
-
-      if(keyword){
-
       if (keyword) {
-
         filterAndRender(keyword);
+      } else {
+        if (listItemRef.current) {
+          listItemRef.current.innerHTML = "";
+        }
       }
     }
-  }, [keyword]);
+  }, [keyword, data]);
 
   return (
     <header className="header">
@@ -125,6 +124,13 @@ const Header = () => {
           <button onClick={()=>navigate("/Signup")} className="signup-btn">
             Sign up
           </button>
+          <button onClick={()=>{
+            setIsLogin(true)
+          }} className="signin-btn" >Sign In</button>
+          {isLogin === true && (
+            <Login onclose={()=>setIsLogin(false)}></Login>
+          )}
+          <button onClick={()=>navigate("/profile")} className="profile-btn">Profile</button>
         </div>
       </div>
     </header>

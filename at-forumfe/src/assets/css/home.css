@@ -1,13 +1,12 @@
-*{
-    box-sizing: border-box;
+* {
+  box-sizing: border-box;
 }
+
 .item-container {
-  width: 70%;
-  margin: 0 auto;
+  width: 90%;
+  margin: 5rem auto;
   display: flex;
   flex-wrap: wrap;
-  margin-top:5rem;
-  margin-bottom:5rem;
   gap: 20px;
   justify-content: center;
 }
@@ -17,29 +16,37 @@
   box-sizing: border-box;
   border: 1px solid #ccc;
   padding: 2vh;
-  min-width: 30rem;
+  min-width: 260px;
   max-width: 30rem;
   text-align: center;
   background-color: #f9f9f9;
-  height: 40rem; /* Fixed height in vh */
+  height: 40rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
 
-/* Consistent height using vh units */
+/* Đồng bộ chiều cao nội dung */
 .item h2 {
   min-height: 4vh;
-  margin:0 0;
+  margin: 0 0;
 }
 
 .item p {
   min-height: 5vh;
-  margin:2vh 0 2vh 0;
+  margin: 2vh 0;
 }
 
 .item h5 {
   min-height: 4vh;
-  margin:0 0;
-  color:green;
+  margin: 0 0;
+  color: green;
+}
+
+/* ✅ Responsive */
+@media (max-width: 768px) {
+  .item {
+    flex: 1 1 100%;
+    max-width: 100%;
+  }
 }

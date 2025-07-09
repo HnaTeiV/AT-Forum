@@ -29,63 +29,82 @@ async function seed() {
         email: "user1@forum.com",
         passwordHash: "hash1",
         role: "member",
+        firstName: "Alice",
+        lastName: "Nguyen",
       },
       {
         username: "user2",
         email: "user2@forum.com",
         passwordHash: "hash2",
         role: "member",
+        firstName: "Bob",
+        lastName: "Tran",
       },
       {
         username: "user3",
         email: "user3@forum.com",
         passwordHash: "hash3",
         role: "member",
+        firstName: "Carol",
+        lastName: "Pham",
       },
       {
         username: "user4",
         email: "user4@forum.com",
         passwordHash: "hash4",
         role: "member",
+        firstName: "David",
+        lastName: "Le",
       },
       {
         username: "user5",
         email: "user5@forum.com",
         passwordHash: "hash5",
         role: "member",
+        firstName: "Eva",
+        lastName: "Vo",
       },
       {
         username: "user6",
         email: "user6@forum.com",
         passwordHash: "hash6",
         role: "member",
+        firstName: "Frank",
+        lastName: "Hoang",
       },
       {
         username: "user7",
         email: "user7@forum.com",
         passwordHash: "hash7",
         role: "member",
+        firstName: "Grace",
+        lastName: "Doan",
       },
       {
         username: "user8",
         email: "user8@forum.com",
         passwordHash: "hash8",
         role: "member",
+        firstName: "Hank",
+        lastName: "Pham",
       },
       {
         username: "user9",
         email: "user9@forum.com",
         passwordHash: "hash9",
         role: "member",
+        firstName: "Ivy",
+        lastName: "Ngo",
       },
       {
         username: "user10",
         email: "user10@forum.com",
         passwordHash: "hash10",
         role: "member",
+        firstName: "Jack",
+        lastName: "Ly",
       },
     ]);
-
     const categories = await Category.insertMany([
       { name: "Search Engines", description: "Search platforms", sortOrder: 1 },
       {
@@ -118,7 +137,6 @@ async function seed() {
         image: "assets/image/Google.png",
 
         views: 5555,
-
       },
       {
         title: "YouTube",
@@ -131,7 +149,6 @@ async function seed() {
         image: "assets/image/YouTube.png",
 
         views: 599484,
-
       },
       {
         title: "Facebook",
@@ -143,8 +160,7 @@ async function seed() {
         tags: ["social", "networking"],
         image: "assets/image/Facebook.png",
 
-        views: 599424,     
-
+        views: 599424,
       },
       {
         title: "Instagram",
@@ -157,7 +173,6 @@ async function seed() {
         image: "assets/image/Instagram.png",
 
         views: 59942,
-
       },
       {
         title: "Twitter",
@@ -198,7 +213,6 @@ async function seed() {
         status: "published",
         tags: ["portal", "email"],
         image: "assets/image/Yahoo.png",
-
       },
       {
         title: "TikTok",
