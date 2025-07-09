@@ -4,6 +4,7 @@ const userRoutes= require('./routes/user');
 const categoryRoutes=require('./routes/category');
 const threadRoutes = require('./routes/thread');
 const postRoutes=require('./routes/post');
+const path=require('path');
 const app = express();
 
 app.use(cors({
@@ -21,6 +22,7 @@ app.use(express.urlencoded({ extended: true }));
 //   // console.log("Authorization header:", req.headers.authorization);
 //   next();
 // });
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 //Routes
 app.use('/api/user',userRoutes);
 app.use('/api/category',categoryRoutes);

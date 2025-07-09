@@ -69,12 +69,16 @@ async function updateUser(user) {
         email: user.email,
         passwordHash: user.passwordHash,
         role: user.role,
+        firstName:user.fname,
+        lastName:user.lname,
+        image:user.image,
+        lastUpdated:Date.now(),
       },
       { new: true }
     ).then((updatedUser) => {
       if (updatedUser) {
         console.log(updatedUser);
-        return updatedUser;
+        return "Update profile success";
       } else {
         return "User Not Found";
       }
