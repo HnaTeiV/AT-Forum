@@ -1,6 +1,6 @@
 const userService = require("../services/userService");
 const generateToken = require("../utils/generateToken");
- 
+
 async function getAllUsers(req, res) {
   try {
     const users = await userService.getAllUsers();
@@ -30,9 +30,9 @@ async function addUser(req, res) {
 }
 async function deleteUser(req, res) {
   try {
-      const id = req.query.id;
+    const id = req.query.id;
     const message = await userService.deleteUser(id);
-     if (message === "User not found") {
+    if (message === "User not found") {
       return res.status(404).json({ error: message });
     }
     res.status(200).json({ message });
@@ -41,32 +41,37 @@ async function deleteUser(req, res) {
     res.status(500).json({ error: "Internal server error" });
   }
 }
-async function updateUser(req,res){
-    try{
-        const data = await userService.updateUser(req.body);
-        res.status(200).json({data});
-    }catch(error){
-        console.error("Name of error:" + error);
+async function updateUser(req, res) {
+  try {
+    const userData = {
+      ...req.body,
+      image: req.file?.filename || null,
+    };
+    console.log(userData);
+    const data = await userService.updateUser(userData);
+    console.log(data);
+    res.status(200).json({ message: "Profile updated successfully" });
+  } catch (error) {
+    console.error("Name of error:" + error);
     res.status(500).json({ error: "Internal server error" });
-    }
-}
-async function login(req,res){
-  try{
-    const {username,password}=req.body;
-    const result= await userService.login(username,password);
-    if(!result){
-      
-      res.status(400).json("Something went wrong in Controllers");
-    }
-    const token=generateToken(result.user);
-      return res.status(200).json({result,token});
-  }catch(error){
-      console.error("Name of error:"+error);
-      return res.status(500).json({error:"Internal server error"});
   }
 }
-async function getProfileUser(req,res){
-   try {
+async function login(req, res) {
+  try {
+    const { username, password } = req.body;
+    const result = await userService.login(username, password);
+    if (!result) {
+      res.status(400).json("Something went wrong in Controllers");
+    }
+    const token = generateToken(result.user);
+    return res.status(200).json({ result, token });
+  } catch (error) {
+    console.error("Name of error:" + error);
+    return res.status(500).json({ error: "Internal server error" });
+  }
+}
+async function getProfileUser(req, res) {
+  try {
     const user = req.user;
     if (!user || !user.id) {
       return res.status(401).json({ error: "Unauthorized" });
@@ -87,4 +92,12 @@ async function getProfileUser(req,res){
     return res.status(500).json({ error: "Internal server error" });
   }
 }
-module.exports = { getAllUsers, getUserByUserName, addUser,deleteUser,updateUser,login,getProfileUser };
+module.exports = {
+  getAllUsers,
+  getUserByUserName,
+  addUser,
+  deleteUser,
+  updateUser,
+  login,
+  getProfileUser,
+};
