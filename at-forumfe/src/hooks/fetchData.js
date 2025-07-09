@@ -52,7 +52,10 @@ const login = (url) => {
         body: JSON.stringify(userData),
       });
       const data = await response.json();
+
       console.log(data)
+
+
       if (response.ok) {
         localStorage.setItem("token", data.token);
         alert("Login successful");
