@@ -1,4 +1,5 @@
 const { json } = require("express");
+const bcrypt = require("bcrypt");
 const User = require("../models/User");
 
 async function getAllUsers() {
@@ -25,10 +26,15 @@ async function getUserByUserName(username) {
 
 async function addUser(user) {
   try {
+    const saltRounds = 10;
+    const bcryptPasswordHash = await bcrypt.hash(user.password, saltRounds);
+    console.log(user);
     const newUser = new User({
+      firstName: user.firstName,
+      lastName: user.lastName,
       username: user.username,
       email: user.email,
-      passwordHash: user.passwordHash,
+      passwordHash: bcryptPasswordHash,
       role: user.role,
       createdAt: new Date(),
     });
@@ -57,7 +63,7 @@ async function deleteUser(id) {
 async function updateUser(user) {
   try {
     await User.findOneAndUpdate(
-      { username: user.username },
+      { _id: user._id },
       {
         username: user.username,
         email: user.email,
@@ -78,10 +84,31 @@ async function updateUser(user) {
     throw error;
   }
 }
-
+async function login(username, password) {
+  const user = await User.findOne({ username });
+  if (!user) {
+    return "User not found";
+  }
+  const validPassword = await bcrypt.compare(password, user.passwordHash);
+  if (!validPassword) {
+    return "Invalid credentials";
+  }
+  return { success: true, user, message: "Login success" };
+}
+async function getProfileUser(user){
+   try {
+    const result = await User.findById(user.id).select("-password");
+    return result;
+  } catch (error) {
+    throw new Error("Database error");
+  }
+}
 module.exports = {
   getAllUsers,
   getUserByUserName,
   addUser,
-  deleteUser,updateUser
+  deleteUser,
+  updateUser,
+  login,
+  getProfileUser,
 };

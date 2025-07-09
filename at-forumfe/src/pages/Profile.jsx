@@ -1,39 +1,41 @@
-import React, { useState } from "react";
-import '../assets/css/signup.css';
-import {useRegisterUser} from "../hooks/fetchData";
-export default function SignUp() {
-  const [formData, setFormData] = useState({
-    fname: "",
+import React, { useEffect, useState } from "react";
+import {fetchProfile} from "../hooks/fetchProfile";
+export default function Profile() {
+  const [user, setUser] = useState(null);
+  const [error, setError] = useState("");
+  const [message,setMessage]=useState("");
+  const [formData,setFormData]=useState({
+     fname: "",
     lname: "",
     username: "",
     password: "",
     email: "",
-  });
-
-  const [result, setResult] = useState(null);
-
-  // Call the hook at the top level
-  const registerUser = useRegisterUser("http://localhost:5000/api/user/");
-
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value, // uses name attribute
-    });
-  };
-
-  const handleSubmit = async (e) => {
+  })
+  useEffect(() => {
+    
+    fetchProfile(setUser,setError,setMessage);
+  }, []);
+  const handleChange = (e) =>{
+    e.preventDefault();
+    setFormData({...formData,[e.target.name]:e.target.value});
+  }
+    const handleSubmit = async (e) => {
     e.preventDefault(); // prevent page reload
     console.log("Form Submitted:", formData);
-    // Use the function returned by the hook
-    const response = await registerUser(formData);
-    setResult(response);
+    // // Use the function returned by the hook
+    // const response = await registerUser(formData);
+    // setResult(response);
   };
 
+  if (error) return <div className="error">{error}</div>;
+
+  if (!user) return <div>Loading profile...</div>;
+
   return (
-    <div className="signUpContainer">
+    <div className="profileContainer">
+      <h1>{message}</h1>
       <h1>Sign Up</h1>
-      <div className="signUpContent">
+      <div className="profileContent">
         <form onSubmit={handleSubmit}>
           <label htmlFor="fname">First Name:</label>
           <input
@@ -90,8 +92,8 @@ export default function SignUp() {
 
       </div>
        {/* ✅ Show success result if available */}
-      {result && (
-        <div className="signUpResultBox">
+      {/* {result && (
+        <div className="profileResultBox">
           <h2>✅ Registration Successful!</h2>
           <table>
             <tbody>
@@ -114,7 +116,7 @@ export default function SignUp() {
             </tbody>
           </table>
         </div>
-      )}
+      )} */}
     </div>
   );
 }

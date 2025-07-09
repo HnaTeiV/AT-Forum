@@ -3,9 +3,10 @@
   padding: 0;
   box-sizing: border-box;
 }
+
 .footer {
   background-color: #f8f8f8;
-  padding: 1vh 0.5px;
+  padding: 2rem 0; /* tăng chiều cao */
   border-top: 1px solid #ddd;
 }
 
@@ -13,25 +14,22 @@
   display: flex;
   gap: 40px;
   flex-wrap: wrap;
-  justify-content: space-around;
-  width: 70vw; /* Or 70% if you want it based on parent width */
+  justify-content: space-between;
+  width: 90%;
   margin: 0 auto;
-  width: 80%;
-  
 }
 
 .contact-form,
 .info {
-  flex: 1 1 400px;
+  flex: 1 1 45%;
   min-width: 300px;
 }
-
 
 .contact-form h2,
 .info h2 {
   margin-bottom: 20px;
   color: #000000;
-  font-size: 1.5rem;
+  font-size: 1.75rem; /* to hơn */
 }
 
 .contact-form form label {
@@ -39,16 +37,17 @@
   margin-bottom: 0;
   color: #000000;
   font-weight: 500;
+  font-size: 1rem;
 }
 
 .contact-form input,
 .contact-form textarea {
   width: 100%;
-  padding: 8px 12px;
+  padding: 10px 14px;
   margin-top: 5px;
   border: 1px solid #ccc;
   border-radius: 6px;
-  font-size: 1rem;
+  font-size: 1.05rem;
   resize: vertical;
   color: #000000;
 }
@@ -56,26 +55,24 @@
 input,
 textarea {
   width: 100%;
-  padding: 8px 12px;
+  padding: 10px 14px;
   margin-top: 5px;
   border: 1px solid #ccc;
   border-radius: 6px;
-  font-size: 1rem;
+  font-size: 1.05rem;
   resize: vertical;
   color: #000000;
 }
 
-
 button {
-  padding: 0.375rem 1rem;
-  font-size: 0.875rem;
+  padding: 0.5rem 1.5rem;
+  font-size: 1rem;
   font-weight: 500;
   background-color: #000000;
   border-radius: 9999px;
   transition: background-color 0.2s ease;
-  margin: 0 0 0 0;
-  display: block; /* để nút thành block-level element */
-  margin: 20px auto 0; /* căn giữa ngang, margin trên 20px */
+  display: block;
+  margin: 20px auto 0;
   cursor: pointer;
   color: white;
 }
@@ -87,5 +84,27 @@ button:hover {
 .info p {
   margin-bottom: 10px;
   color: #999999;
-  font-size: 1rem;
+  font-size: 1.05rem; /* rõ hơn */
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .contact-form,
+  .info {
+    flex: 1 1 100%;
+  }
+
+  .container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .contact-form form,
+  .info {
+    width: 100%;
+  }
+
+  button {
+    width: 100%;
+  }
 }
