@@ -6,6 +6,7 @@ export default function Project() {
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
 
+
   // Lọc theo tag
   const [selectedTag, setSelectedTag] = useState(null);
   const [allTags, setAllTags] = useState([]);
@@ -15,6 +16,7 @@ export default function Project() {
   const [categories, setCategories] = useState([]);
 
   const navigate = useNavigate();
+
 
   useEffect(() => {
     // Lấy projects
@@ -57,6 +59,7 @@ export default function Project() {
   return (
     <div className="projectsContainer">
       <h1>All Projects</h1>
+
 
       <div className="projectLayout">
         <aside className="sidebar">
@@ -138,6 +141,45 @@ export default function Project() {
           <p>No projects found.</p>
         )}
       </div>
+
+      {loading ? (
+        <p>Loading...</p>
+      ) : projects.length > 0 ? (
+        <div className="productGridContainer">
+          {projects.map((item) => (
+            <div 
+              className={`prodcutContainer ${item.title}`}
+              key={item._id}
+              onClick={() =>
+                navigate(`/project/${encodeURIComponent(item.title)}`)
+              }
+              style={{ cursor: "pointer" }}
+            >
+              <div className="productImageContainer">
+                <img
+                  src={item.image ? `/${item.image}` : "/placeholder.jpg"}
+                  alt={item.title}
+                />
+                <button className="detailBtn">-</button>
+                <div className="productContentContainer">
+                <h2>{item.title}</h2>
+                {item.url && <h3 className="urlData">{item.url}</h3>}
+                <p className="contentData">{item.description}</p>
+                {item.tags && (
+                  <h5 className="tagsData">{item.tags.join(", ")}</h5>
+                )}
+                <h5 className="statusData">{item.status}</h5>
+                <h5 className="viewsData">{item.views} views</h5>
+              </div>
+              </div>
+              
+            </div>
+          ))}
+        </div>
+      ) : (
+        <p>No projects found.</p>
+      )}
+
     </div>
   );
 }
