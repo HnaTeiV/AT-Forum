@@ -5,7 +5,7 @@ const User = require("../models/User");
 async function getAllUsers() {
   try {
     const users = await User.find();
-    console.log(users);
+
     return users;
   } catch (error) {
     console.error("Error fetching user: ", error);
@@ -16,7 +16,7 @@ async function getAllUsers() {
 async function getUserByUserName(username) {
   try {
     const user = await User.find({ username: username });
-    console.log(user);
+
     return user;
   } catch (error) {
     console.error("Error fetching user: ", error);
@@ -28,18 +28,19 @@ async function addUser(user) {
   try {
     const saltRounds = 10;
     const bcryptPasswordHash = await bcrypt.hash(user.password, saltRounds);
-    console.log(user);
+
     const newUser = new User({
       firstName: user.firstName,
       lastName: user.lastName,
       username: user.username,
       email: user.email,
       passwordHash: bcryptPasswordHash,
+      image: user.image || "",
       role: user.role,
       createdAt: new Date(),
     });
     const savedUser = await newUser.save();
-    console.log("User saved: ", savedUser);
+
     return "Add user success";
   } catch (error) {
     console.error("Error fetching user: ", error);
@@ -50,7 +51,7 @@ async function addUser(user) {
 async function deleteUser(id) {
   try {
     const deletedUser = await User.findByIdAndDelete(id);
-    console.log(deletedUser);
+
     if (!deletedUser) {
       return "User not found";
     }
@@ -77,7 +78,7 @@ async function updateUser(user) {
       { new: true }
     ).then((updatedUser) => {
       if (updatedUser) {
-        console.log(updatedUser);
+
         return "Update profile success";
       } else {
         return "User Not Found";
@@ -95,7 +96,7 @@ async function login(username, password) {
   }
   const validPassword = await bcrypt.compare(password, user.passwordHash);
   if (!validPassword) {
-    return "Invalid credentials";
+    return {success:false,message:"Invalid credentials"};
   }
   return { success: true, user, message: "Login success" };
 }

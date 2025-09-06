@@ -4,6 +4,7 @@
   --gray-color: #2e2d2f;
   --black-color: #121212;
   --transition: 0.5s ease-in-out;
+  --width:100%;
 }
 .Wikipedia {
   --background-color1:#000000;

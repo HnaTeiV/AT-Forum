@@ -1,0 +1,23 @@
+.adminContainer table{
+    width: 100%;
+    border-collapse: collapse;
+    height: 100%;
+}
+.adminContainer table th, .adminContainer table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+.adminContainer table tr{
+    text-align: center;
+}
+.adminContainer table tbody tr td:last-child {
+    display:flex;
+    padding:0;
+}
+.adminContainer table tbody tr td:last-child button {
+    margin: 5px auto;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+}

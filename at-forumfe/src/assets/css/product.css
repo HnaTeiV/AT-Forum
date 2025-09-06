@@ -1,4 +1,7 @@
-/* === Màu nền theo tên dự án === */
+
+
+/* === Lưới project: luôn 3 cột === */
+
 .Wikipedia {
   --background-color1: #000000;
   --background-color2: #000000;
@@ -43,13 +46,13 @@
 .Facebook {
   --background-color1: #ffffff;
   --background-color2: #ffffff;
-  --text-color: #000000;
+  --text-color: rgb(0, 0, 0);
   --status-color: #000000;
 }
 .Instagram {
   --background-color1: #a008f4;
   --background-color2: #fc068c;
-  --text-color: rgba(129, 6, 119, 1);
+  --text-color: rgba(129, 6, 119, 255);
   --status-color: #000000;
 }
 .Twitter {
@@ -59,6 +62,165 @@
   --status-color: #000000;
 }
 
+.productGridContainer {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  padding: 20px;
+  color: var(--text-color);
+  flex: 1;
+}
+
+/* === Project Card === */
+.productContainer {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background: var(--background-color1, #fff);
+
+  .projectsContainer {
+    margin: 0 20%;
+  }
+  .productContainer {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #fff;
+
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+  }
+
+  /* Hover hiệu ứng sáng ảnh */
+  .productContainer:hover .productImageContainer img {
+    filter: brightness(130%);
+  }
+
+  /* === Hình ảnh === */
+  .productImageContainer {
+    position: relative;
+    filter: brightness(100%);
+  }
+
+  .productImageContainer img {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+    z-index: 1;
+  }
+
+  /* === Nút detail === */
+  .detailBtn {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    background-color: black;
+    opacity: 0.1;
+    border: none;
+    z-index: 2;
+    border-radius: 0;
+  }
+
+  /* === Hover: Hiện thông tin dự án === */
+  .productContentContainer {
+    opacity: 0;
+    pointer-events: none;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 16px;
+    background-color: rgba(255, 255, 255, 0.9);
+    z-index: 3;
+    transition: opacity 0.05s ease-in-out 0.05s;
+  }
+
+  .detailBtn:hover + .productContentContainer {
+    opacity: 1;
+    pointer-events: auto;
+    transition-delay: 0s;
+  }
+
+  /* === Nội dung bên trong project === */
+  .productContentContainer h2 {
+    font-size: 18px;
+    margin-bottom: 5px;
+  }
+
+  .urlData {
+    font-size: 14px;
+    color: #000000;
+    margin-bottom: 5px;
+    word-break: break-word;
+  }
+
+  .contentData {
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 5px;
+  }
+
+  .tagsData,
+  .categoryData,
+  .statusData,
+  .viewsData {
+    font-size: 12px;
+    color: #555;
+    margin-bottom: 3px;
+  }
+
+  height: 100%;
+  object-fit: cover;
+  position: relative;
+  z-index: 1;
+}
+
+.productGridContainer > * {
+  color: var(--text-color);
+}
+
+.productImageContainer {
+  position: relative;
+  transition: filter 0.3s ease;
+  filter: brightness(100%);
+}
+
+.detailBtn {
+  top: 0;
+  padding: 0;
+  z-index: 2;
+  margin: 0 0;
+  width: 100%;
+  opacity: 0.1;
+  background-color: black;
+  border: none;
+  height: 100%;
+  border-radius: 0%;
+  position: absolute;
+}
+
+.productContentContainer {
+  opacity: 0;
+  pointer-events: none; /* Prevent interaction while hidden */
+  width: 100%;
+  padding: 16px;
+  transition: opacity 0.5s ease-in-out 0.3s; /* 0.3s delay before fading in */
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(255, 255, 255, 0);
+  z-index: 3;
+}
+.detailBtn:hover + .productContentContainer {
+  opacity: 1;
+  pointer-events: auto;
+  transition-delay: 0s; /* Show immediately when hovered */
+}
+
+.productContainer:hover .productImageContainer img {
+  filter: brightness(130%);
+}
 
 /* === Layout chính === */
 .projectsContainer {
@@ -71,8 +233,8 @@
   gap: 1.5rem;
   align-items: flex-start;
 }
-/* === Sidebar lọc cố định === */
-.sidebar {
+
+.projectLayout .sidebar {
   width: 220px;
   border-right: 1px solid #ccc;
   padding-right: 10px;
@@ -116,232 +278,3 @@
   color: white;
   font-weight: bold;
 }
-
-/* === Lưới project: luôn 3 cột === */
-
-.Wikipedia {
-  --background-color1:#000000;
-  --background-color2:#000000;
-  --text-color: #fff;
-  --status-color: #2e2d2f;
-}
-.Amazon {
-  --background-color1: #ffffff;
-  --background-color2:#ffffff;
-  --text-color: #ff6600;
-  --status-color: #161d27;
-}
-.Yahoo {
-  --background-color1: #7349f7;
-  --background-color2:  #6001d2;
-  --text-color:#eecbff;
-  --status-color: #000000;
-}
-.TikTok {
-  --background-color1:#000000;
-  --background-color2:#000000;
-  --text-color: #fff;
-  --status-color:#fc2b54;
-}
-.Baidu {
-  --background-color1:#ffffff;
-  --background-color2:#ffffff;
-  --text-color: #4379f7;
-  --status-color: #000000;
-}
-.Google {
-  --background-color1:#ffffff;
-  --background-color2:#ffffff;
-  --text-color: #000000;
-  --status-color: #e94433;
-}
-.YouTube {
-  --background-color1:#ffffff;
-  --background-color2:#ffffff;
-  --text-color: #fc2b54;
-}
-.Facebook {
-  --background-color1:#ffffff;
-  --background-color2:#ffffff;
-  --text-color: rgb(0, 0, 0);
-  --status-color: #000000;
-}
-.Instagram {
-  --background-color1:#a008f4;
-  --background-color2:#fc068c;
-  --text-color: rgba(129, 6, 119, 255);
-  --status-color: #000000;
-}
-.Twitter {
-  --background-color1:#ffffff;
-  --background-color2:#ffffff;
-  --text-color: #1ca1f1;
-  --status-color: #000000;
-}
-
-.productGridContainer {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-  padding: 20px;
-  color: var(--text-color);
-  flex: 1;
-}
-
-
-/* === Project Card === */
-.productContainer {
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  background: var(--background-color1, #fff);
-
-.projectsContainer{
-  margin: 0 20%;
-}
-.productContainer {
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  background-color: #fff;
-
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-}
-
-/* Hover hiệu ứng sáng ảnh */
-.productContainer:hover .productImageContainer img {
-  filter: brightness(130%);
-}
-
-/* === Hình ảnh === */
-.productImageContainer {
-  position: relative;
-  filter: brightness(100%);
-}
-
-.productImageContainer img {
-  width: 100%;
-
-  height: 160px;
-  object-fit: cover;
-  z-index: 1;
-}
-
-/* === Nút detail === */
-.detailBtn {
-  position: absolute;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  padding: 0;
-  margin: 0;
-  background-color: black;
-  opacity: 0.1;
-  border: none;
-  z-index: 2;
-  border-radius: 0;
-}
-
-/* === Hover: Hiện thông tin dự án === */
-.productContentContainer {
-  opacity: 0;
-  pointer-events: none;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  padding: 16px;
-  background-color: rgba(255, 255, 255, 0);
-  z-index: 3;
-  transition: opacity 0.5s ease-in-out 0.3s;
-}
-
-.detailBtn:hover + .productContentContainer {
-  opacity: 1;
-  pointer-events: auto;
-  transition-delay: 0s;
-}
-
-/* === Nội dung bên trong project === */
-.productContentContainer h2 {
-  font-size: 18px;
-  margin-bottom: 5px;
-}
-
-.urlData {
-  font-size: 14px;
-  color: #000000;
-  margin-bottom: 5px;
-  word-break: break-word;
-}
-
-.contentData {
-  font-size: 14px;
-  color: #333;
-  margin-bottom: 5px;
-}
-
-.tagsData,
-.categoryData,
-.statusData,
-.viewsData {
-  font-size: 12px;
-  color: #555;
-  margin-bottom: 3px;
-}
-
-  height: 100%;
-  object-fit: cover;
-  position:relative;
-  z-index: 1;
-}
-
-
-.productGridContainer > *{
-  color:var(--text-color);
-}
-
-.productImageContainer{
-    position: relative;
-    transition: filter 0.3s ease;
-    filter:brightness(100%)
-}
-
-.detailBtn{
-  top:0;
-  padding:0;
-  z-index: 2;
-  margin:0 0;
-  width: 100%;
-  opacity: 0.1;
-  background-color: black;
-  border:none;
-  height:100%;
-  border-radius: 0%;
-  position: absolute;
-  
-}
-
-.productContentContainer {
- opacity: 0;
-  pointer-events: none;     /* Prevent interaction while hidden */
-  width: 100%;
-  padding: 16px;
-  transition: opacity 0.5s ease-in-out 0.3s; /* 0.3s delay before fading in */
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  background-color: rgba(255, 255, 255, 0);
-  z-index: 3;
-  
-}
-.detailBtn:hover + .productContentContainer {
-  opacity: 1;
-  pointer-events: auto;
-  transition-delay: 0s; /* Show immediately when hovered */
-
-}
-
-.productContainer:hover .productImageContainer img {
-  filter: brightness(130%);
-}
-

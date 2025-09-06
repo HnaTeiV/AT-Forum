@@ -8,7 +8,20 @@ async function getTopThreads(req, res) { //new
     res.status(500).json({ error: 'Failed to fetch top threads' });
   }
 }
-
+async function viewThread(req, res) { 
+  try {
+    const { threadId } = req.params;
+    const newViewCount = await threadService.viewThread(threadId);
+    if (!newViewCount) {
+      return res.status(404).json({ message: "Thread not found" });
+    }
+    return res.status(400).json({ message: "Increment views success" });
+  }
+  catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Something went wrong" });
+  }
+}
 async function getAllThreads(req, res) {
   try {
     const threads = await threadService.getAllThreads();
@@ -20,8 +33,8 @@ async function getAllThreads(req, res) {
 
 async function getThreadByKeyword(req, res) {
   try {
+    
     const keyword = req.params.keyword;
-    console.log(keyword);
     const thread = await threadService.getThreadByKeyword(keyword);
     if (!thread) {
       return res.status(404).json({ message: 'Thread not found' });
@@ -43,10 +56,10 @@ async function addThread(req, res) {
 
 async function updateThread(req, res) {
   try {
-    const thread = req.body;
-    const result = await threadService.updateThread(thread);
+  
+    const result = await threadService.updateThread(req.body);
     if (result === "Thread Not Found") {
-      return res.status(404).json({ message: result });
+      return res.status(404).json( result );
     }
     res.json(result);
   } catch (error) {
@@ -73,4 +86,5 @@ module.exports = {
   updateThread,
   deleteThread,
   getTopThreads,
+  viewThread,
 };

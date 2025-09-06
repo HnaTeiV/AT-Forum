@@ -1,9 +1,9 @@
 const Post = require('../models/Post');
-
-async function getAllPosts() {
+const User = require('../models/User');
+async function getAllPostsById(id) {
   try {
-    return await Post.find({ isDeleted: false })
-      .populate('userId', 'username')    // populate user info (only username)
+    return await Post.find({threadId:id ,isDeleted: false })
+      .populate('author')    // populate user info (only username)
       .populate('threadId')              // populate thread info if needed
       .sort({ createdAt: -1 });
   } catch (error) {
@@ -11,7 +11,18 @@ async function getAllPosts() {
     throw error;
   }
 }
-
+async function viewPost(id) {
+  try {
+    return await Post.findByIdAndUpdate(
+      id,
+      { $inc: { views: 1 } },
+      { new: true }
+    );
+  } catch (error) {
+    console.error("Error incrementing view count:", error);
+    throw error;
+  }
+}
 async function getPostById(id) {
   try {
     return await Post.findById(id)
@@ -23,16 +34,16 @@ async function getPostById(id) {
   }
 }
 
-async function addPost(post) {
+async function addPost({ threadId, author, title, contents }) {
   try {
-    const newPost = new Post({
-      threadId: post.threadId,
-      author: post.userId,
-      content: post.content,
-      createdAt: new Date(),
-      isDeleted: false,
-      likes: 0,
-    });
+    const auth= await User.findOne({ username: author });
+
+    if (!author) {
+      throw new Error("Author not found");
+    }
+    const newPost = await Post.createPost(threadId, auth._id, title, contents);
+    console.log("New post created:", newPost);
+
     return await newPost.save();
   } catch (error) {
     console.error("Error adding post:", error);
@@ -53,7 +64,6 @@ async function updatePost(post) {
       { new: true }
     ).then((updatedPost) => {
       if (updatedPost) {
-        console.log("Updated post:", updatedPost);
         return updatedPost;
       } else {
         return "Post Not Found";
@@ -81,9 +91,10 @@ async function deletePost(id) {
 }
 
 module.exports = {
-  getAllPosts,
+  getAllPostsById,
   getPostById,
   addPost,
   updatePost,
   deletePost,
+  viewPost,
 };

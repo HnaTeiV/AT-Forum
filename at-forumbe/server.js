@@ -1,21 +1,27 @@
-require('dotenv').config();       // Load .env variables
+const dotenv = require("dotenv");
+dotenv.config();
+require("./redisClient.js")
+const mongoose = require("mongoose");
+const app = require("./app.js"); // ✅ CommonJS require, no "import"
 
-const mongoose = require('mongoose'); // MongoDB ORM
-const app = require('./app');         // Import Express app
-
+// ENV vars
 const PORT = process.env.PORT || 5000;
 const MONGO_URL = process.env.MONGO_URL;
 
-// Connect to MongoDB
-mongoose.connect(MONGO_URL)
-  .then(() => {
-    console.log('MongoDB connected');
 
-    // Start the Express server
+// ----------------- MongoDB -----------------
+mongoose
+  .connect(MONGO_URL)
+  .then(() => {
+    console.log("✅ MongoDB connected");
+
+    // Start Express server
     app.listen(PORT, () => {
-      console.log(`Server running on port ${PORT}`);
+      console.log(`🚀 Server running on port ${PORT}`);
     });
   })
-  .catch(err => {
-    console.error('MongoDB connection error:', err);
+  .catch((err) => {
+    console.error("❌ MongoDB connection error:", err);
   });
+
+// ----------------- Redis -----------------

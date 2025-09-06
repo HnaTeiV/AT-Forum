@@ -6,7 +6,6 @@ export default function Project() {
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
 
-
   // Lọc theo tag
   const [selectedTag, setSelectedTag] = useState(null);
   const [allTags, setAllTags] = useState([]);
@@ -16,7 +15,15 @@ export default function Project() {
   const [categories, setCategories] = useState([]);
 
   const navigate = useNavigate();
-
+  const handleClick = (project) => {
+    navigate(`/project/${encodeURIComponent(project.title)}`);
+    fetch(`http://localhost:5000/api/thread/view/${project._id}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+  };
 
   useEffect(() => {
     // Lấy projects
@@ -51,15 +58,16 @@ export default function Project() {
   //  Lọc dự án theo tag và category
   const filteredProjects = projects.filter((p) => {
     const matchTag = selectedTag ? p.tags?.includes(selectedTag) : true;
-  const matchCategory = selectedCategory ? p.category?._id === selectedCategory : true;
- 
+    const matchCategory = selectedCategory
+      ? p.category?._id === selectedCategory
+      : true;
+
     return matchTag && matchCategory;
   });
 
   return (
     <div className="projectsContainer">
       <h1>All Projects</h1>
-
 
       <div className="projectLayout">
         <aside className="sidebar">
@@ -110,16 +118,14 @@ export default function Project() {
           <div className="productGridContainer">
             {filteredProjects.map((item) => (
               <div
-                className={`prodcutContainer ${item.title}`}
+                className={`productContainer ${item.title}`}
                 key={item._id}
-                onClick={() =>
-                  navigate(`/project/${encodeURIComponent(item.title)}`)
-                }
+                onClick={()=>handleClick(item)}
                 style={{ cursor: "pointer" }}
               >
                 <div className="productImageContainer">
                   <img
-                    src={item.image ? `/${item.image}` : "/placeholder.jpg"}
+                    src={item.image ? `${item.image}` : "/placeholder.jpg"}
                     alt={item.title}
                   />
                   <button className="detailBtn">-</button>
@@ -141,45 +147,6 @@ export default function Project() {
           <p>No projects found.</p>
         )}
       </div>
-
-      {loading ? (
-        <p>Loading...</p>
-      ) : projects.length > 0 ? (
-        <div className="productGridContainer">
-          {projects.map((item) => (
-            <div 
-              className={`prodcutContainer ${item.title}`}
-              key={item._id}
-              onClick={() =>
-                navigate(`/project/${encodeURIComponent(item.title)}`)
-              }
-              style={{ cursor: "pointer" }}
-            >
-              <div className="productImageContainer">
-                <img
-                  src={item.image ? `/${item.image}` : "/placeholder.jpg"}
-                  alt={item.title}
-                />
-                <button className="detailBtn">-</button>
-                <div className="productContentContainer">
-                <h2>{item.title}</h2>
-                {item.url && <h3 className="urlData">{item.url}</h3>}
-                <p className="contentData">{item.description}</p>
-                {item.tags && (
-                  <h5 className="tagsData">{item.tags.join(", ")}</h5>
-                )}
-                <h5 className="statusData">{item.status}</h5>
-                <h5 className="viewsData">{item.views} views</h5>
-              </div>
-              </div>
-              
-            </div>
-          ))}
-        </div>
-      ) : (
-        <p>No projects found.</p>
-      )}
-
     </div>
   );
 }
