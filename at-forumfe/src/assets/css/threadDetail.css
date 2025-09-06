@@ -1,0 +1,51 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* semi-transparent background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999; /* stay on top */
+}
+.Thread-Detail-Content {
+  background-color: white;
+  position: relative;
+  top: -15%;
+  padding: 2rem;
+  border-radius: 12px;
+  width: 70rem;
+  height: 40rem;
+  align-content: center;
+  text-align: center;
+}
+.close-button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  color: #333;
+  position: absolute;
+  right:0;
+  top: 0;
+  font-size: 2rem;
+  
+}
+.button-group{
+  display: flex;
+  position:relative;
+  justify-content: center;
+}
+.select-group{
+  margin-top:20px;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+}
+.select-group-container{
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

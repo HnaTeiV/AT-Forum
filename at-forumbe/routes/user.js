@@ -1,7 +1,7 @@
 const express= require('express');
 const router= express.Router();
 const userController=require('../controllers/user.js');
-const authMiddleware= require("../middlewares/authMiddleware");
+const {authMiddleware,requireRole}= require("../middlewares/authMiddleware");
 const multer= require('multer');
 const path=require('path');
 const storage = multer.diskStorage({
@@ -13,16 +13,12 @@ const upload = multer({ storage });
 
 router.get('/',userController.getAllUsers);
 router.get('/profile',authMiddleware,userController.getProfileUser
-    //(req,res)=>{
-//     console.log("✅ /profile route hit!");
-//     console.log("req.user:", req.user)
-//     return res.json({ message: `Welcome ${req.user.username}!`, user: req.user });}
 )
 router.get('/:username',userController.getUserByUserName);
-
+router.get('/:userId/likes',authMiddleware,userController.getUserLikes);
 router.post('/',userController.addUser);
-router.delete('/',userController.deleteUser);
+router.delete('/deleteUser/:id',userController.deleteUser);
 
-router.put('/updateUser',upload.single("image"),userController.updateUser);
+router.put('/updateUser', authMiddleware, requireRole("admin", "moderator"),upload.single("image"),userController.updateUser);
 router.post('/login',userController.login);
 module.exports=router;

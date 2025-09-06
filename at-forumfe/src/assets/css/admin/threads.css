@@ -1,0 +1,62 @@
+.threads-container {
+  background-color: white;
+  height: 100%;
+  margin: 10px auto;
+  border-radius: 5px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.thread-item {
+  flex: 0 0 33.33%;
+  flex: 1 1 calc(33.333% - 20px);
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  padding: 2vh;
+  min-width: 260px;
+  max-width: 30rem;
+  text-align: center;
+  background-color: #f9f9f9;
+  height: 40rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.thread-item:hover{
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: rgba(0, 0, 0, 0.1);
+}
+/* Đồng bộ chiều cao nội dung */
+.item h2 {
+  min-height: 4vh;
+  margin: 0 0;
+}
+
+.item p {
+  min-height: 5vh;
+  margin: 2vh 0;
+}
+
+.item h5 {
+  min-height: 4vh;
+  margin: 0 0;
+  color: green;
+}
+.thread-plus-button{
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 80px;
+    color: #888;
+}
+/* ✅ Responsive */
+@media (max-width: 768px) {
+  .item {
+    flex: 1 1 100%;
+    max-width: 100%;
+  }
+}

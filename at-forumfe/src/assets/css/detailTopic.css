@@ -1,0 +1,309 @@
+.overlay {
+  position: fixed;
+  inset: 0;              /* top:0 right:0 bottom:0 left:0 */
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;   /* always vertical center */
+  z-index: 1000;
+  overscroll-behavior: contain; /* stop scroll chaining */
+}
+
+.detailTopicBox {
+  background: #fff;
+  width: 70%;
+  max-width: 1000px;
+  max-height: 80vh;      /* scroll inside the modal if needed */
+  overflow: auto;
+  border-radius: 12px;
+  padding: 20px;
+  position: relative;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+  animation: fadeIn 0.2s ease;
+}
+/* Header (title + close button) */
+.detailTopicHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 10px;
+
+}
+.detailTopicHeader h2 {
+  flex:4;
+  font-size: 1.5rem;
+  color: #333;
+  margin: 0;
+}
+
+/* Avatar section */
+.avatarContainer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+  flex:1;
+}
+
+.avatarImage {
+  width: 50px;
+  height: 50px;
+  background: #ccc;
+  border-radius: 50%;
+}
+
+.avatarName {
+  font-weight: bold;
+}
+
+.avatarRole {
+  font-size: 0.9em;
+  color: gray;
+}
+
+/* Content */
+.detailTopicContent {
+  display: flex;
+  gap: 20px;
+  flex-wrap: nowrap;
+
+}
+.topicDetails{
+    flex:3;
+}
+.mediaGroup{
+  display: flex;
+  margin: 10px 0 10px 0;
+}
+.mediaContainer {
+  width: 30rem;   
+  height: 15rem;   /* prevent shrinking */
+}
+
+/* Actions */
+.topicActions {
+  margin-top: 20px;
+  display: flex;
+  gap: 10px;
+}
+
+.actionButton {
+  background: #007bff;
+  color: #fff;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s, width 0.2s ease; /* add width transition */
+  min-width: 70px;   /* base width for "Like" */
+  text-align: center;
+}
+
+/* Liked state */
+.actionButton.liked {
+  background: #ff4d4f;
+  font-weight: bold;
+  min-width: 90px;   /* slightly wider to fit "Liked" */
+  box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+  transform: scale(1.05);
+}
+
+.actionButton:hover {
+  background: #0056b3;
+}
+
+.actionButton.liked:hover {
+  background: #d9363e;
+}
+/* Modern thin scrollbar */
+.detailTopicBox::-webkit-scrollbar {
+  width: 8px;
+}
+
+.detailTopicBox::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 8px;
+}
+
+.detailTopicBox::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 8px;
+}
+
+.detailTopicBox::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+.userImage{
+  width:5rem;
+  height:5rem;
+}
+.commentArea {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  background: #fff;
+  max-height: 80vh;
+  overflow: hidden;
+  padding: 10px;
+}
+
+/* Filter dropdown */
+#filterComment {
+  margin-bottom: 10px;
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 0.9rem;
+  background: #f9f9f9;
+  cursor: pointer;
+}
+
+/* Each comment block */
+.commentContainer {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 12px;
+  padding: 10px;
+  border-radius: 8px;
+  background: #fafafa;
+  border: 1px solid #eee;
+  transition: background 0.2s ease;
+}
+
+.commentContainer:hover {
+  background: #f0f0f0;
+}
+
+/* Avatar */
+.avatarContainer {
+  flex-shrink: 0;
+}
+
+.avatarImage {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #ccc; /* placeholder */
+}
+
+/* Comment content */
+.commentContent {
+  flex: 1;
+}
+
+.username {
+  font-size: 0.95rem;
+  font-weight: bold;
+  margin: 0 0 5px 0;
+}
+
+.contents {
+  font-size: 0.9rem;
+  line-height: 1.4;
+  margin-bottom: 6px;
+}
+
+/* Actions (like, reply, etc.) */
+.commentActions {
+  display: flex;
+  gap: 8px;
+}
+
+.commentActionButton {
+  padding: 4px 10px;
+  font-size: 0.85rem;
+  background: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.commentActionButton:hover {
+  background: #0056b3;
+}
+.createComment {
+  display: flex;
+  align-items: flex-start;
+  padding: 10px;
+  border-top: 1px solid #ddd;
+  position: sticky;
+}
+
+.createCommentContainer {
+  flex: 10;
+  margin-left: 10px;
+}
+
+.createCommentContent {
+  width: 100%;
+  min-height: 50px;
+  padding: 8px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  resize: none;
+}
+
+.pluginContainer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 5px;
+}
+
+.iconButton {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.submitButton {
+  padding: 5px 12px;
+  border: none;
+  border-radius: 6px;
+  background: #007bff;
+  color: white;
+  cursor: pointer;
+}
+
+.previewContainer {
+  margin-top: 8px;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.avatarContainer{
+  flex:1;
+}
+.commentContent{
+  flex:15;
+}
+.commentActions{
+  display: flex;
+
+}
+.commentActionButton{
+  margin: 10px 5px 0 0;
+  background-color: #007bff;
+  border-radius: 5px;
+  border: none;
+}
+/* Fade animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}

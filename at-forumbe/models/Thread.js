@@ -12,8 +12,8 @@ const threadSchema = new mongoose.Schema({
   }, // Website type/category
   status: {
     type: String,
-    enum: ["draft", "published", "archived"],
-    default: "draft",
+    enum: ["drafted", "published", "archived"],
+    default: "drafted",
   },
   image:{type:String,default:""},
   tags: [{ type: String }],
@@ -23,3 +23,4 @@ const threadSchema = new mongoose.Schema({
 });
 
 module.exports = mongoose.model("Thread", threadSchema);
+

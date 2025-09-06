@@ -2,22 +2,20 @@ import React from "react";
 import { useState, useEffect, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FaSearch } from "react-icons/fa";
-import {Login} from "../components/login";
+import { Login } from "../components/login";
 import { useFetch, useSearchData } from "../hooks/fetchData";
-
 
 import "../assets/css/header.css";
 
 const Header = () => {
+  const [username, setUsername] = useState("");
   const [keyword, setKeyword] = useState("");
   const data = useFetch("http://localhost:5000/api/thread");
   const listItemRef = useRef(null);
   const navigate = useNavigate();
-  const [isLogin,setIsLogin]=useState(false);
+  const [isLogin, setIsLogin] = useState(false);
   const onKeyDown = (e) => {
     if (e.key === "Enter") {
-      // Handle search logic here, e.g., redirect to search results page
-      console.log("Searching for:", keyword);
       // You can also update the URL or state to show search results
       navigate(`/project/${encodeURIComponent(keyword)}`);
     }
@@ -31,8 +29,7 @@ const Header = () => {
       item.title.toLowerCase().includes(searchValue.toLowerCase())
     );
 
-    const listItem=listItemRef.current;
-
+    const listItem = listItemRef.current;
 
     if (!listItem) return;
     if (filteredData.length === 0) {
@@ -48,10 +45,23 @@ const Header = () => {
       )
       .join("");
   }
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("username");
+    localStorage.removeItem("role");
+    setUsername(null);
+  };
   function handleSearch(e) {
     const searchValue = e.target.value;
     setKeyword(searchValue);
   }
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    const savedUsername = localStorage.getItem("username");
+    if (token && savedUsername && savedUsername !== "undefined") {
+      setUsername(savedUsername);
+    }
+  }, []); // ✅ only runs once
   useEffect(() => {
     if (data && data.length > 0) {
       if (!listItemRef) return;
@@ -63,6 +73,8 @@ const Header = () => {
         }
       }
     }
+
+    // Optional side-effects here
   }, [keyword, data]);
 
   return (
@@ -121,16 +133,39 @@ const Header = () => {
             />
             <ul className="listItemSearch" ref={listItemRef}></ul>
           </div>
-          <button onClick={()=>navigate("/Signup")} className="signup-btn">
+          <button onClick={() => navigate("/Signup")} className="signup-btn">
             Sign up
           </button>
-          <button onClick={()=>{
-            setIsLogin(true)
-          }} className="signin-btn" >Sign In</button>
-          {isLogin === true && (
-            <Login onclose={()=>setIsLogin(false)}></Login>
+          {username ? (
+            <div>
+              <span>Hello, {username}!</span>
+              <button onClick={handleLogout}>Logout</button>
+            </div>
+          ) : (
+            <button
+              onClick={() => {
+                setIsLogin(true);
+              }}
+              className="signin-btn"
+            >
+              Sign In
+            </button>
           )}
-          <button onClick={()=>navigate("/profile")} className="profile-btn">Profile</button>
+
+          {isLogin === true && (
+            <Login
+              onclose={() => setIsLogin(false)}
+              onLoginSuccess={(username) => {
+                
+                localStorage.setItem("username", username);
+                setUsername(username);
+                setIsLogin(false);
+              }}
+            ></Login>
+          )}
+          <button onClick={() => navigate("/profile")} className="profile-btn">
+            Profile
+          </button>
         </div>
       </div>
     </header>

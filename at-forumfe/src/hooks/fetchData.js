@@ -9,6 +9,17 @@ const useFetch = (url) => {
   }, [url]);
   return data;
 };
+const useFetchWithId = (url, id) => {
+  const [data, setData] = useState(null);
+  useEffect(() => {
+    if (id) {
+      fetch(`${url}${encodeURIComponent(id)}`)
+        .then((res) => res.json())
+        .then((data) => setData(data));
+    }
+  }, [url, id]);
+  return data;  
+}
 const useSearchData = (url, keyword) => {
   const [data, setData] = useState(null);
   useEffect(() => {
@@ -41,33 +52,44 @@ const useRegisterUser = (url) => {
     }
   };
 };
+const fetchLikedPosts = async (url,userId) => {
+  const token = localStorage.getItem("token");
+  return fetch(`${url}${encodeURIComponent(userId)}/likes`
+  ,{
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  }
+  ).then((res) => res.json());
+}
 const login = (url) => {
   return async (userData) => {
     try {
       const response = await fetch(url, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(userData),
       });
       const data = await response.json();
 
-      console.log(data)
-
-
       if (response.ok) {
-        localStorage.setItem("token", data.token);
-        alert("Login successful");
-        return data;
+        return {
+          success: true,
+          token: data.token,
+          user: data.result.user,
+          message: data.message,
+        };
       } else {
-        alert(data.message || "Login failed");
+        return { success: false, message: data.message };
       }
     } catch (error) {
-      return { error: "Something went wrong." };
+      return { success: false, error: "Something went wrong." };
     }
   };
 };
+
 const updateProfile = (url) => {
   return async (userData) => {
     const formData = new FormData();
@@ -85,8 +107,12 @@ const updateProfile = (url) => {
         console.log(`${key}:`, value);
       }
     }
+    const token = localStorage.getItem("token");
     const res = await fetch(url, {
-      method: "PUT",
+      method: "PUT", 
+      headers: {
+        Authorization: `Bearer ${token}`, // 👈 Include the token
+      },
       body: formData,
     });
 
@@ -94,4 +120,4 @@ const updateProfile = (url) => {
     return data.message || "Profile updated!";
   };
 };
-export { useFetch, useSearchData, useRegisterUser, login, updateProfile };
+export { useFetch, useFetchWithId,useSearchData, useRegisterUser, login, updateProfile,fetchLikedPosts };
