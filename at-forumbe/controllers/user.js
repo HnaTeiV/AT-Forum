@@ -43,9 +43,10 @@ async function deleteUser(req, res) {
     res.status(500).json({ error: "Internal server error" });
   }
 }
+
 async function getUserLikes(req, res) {
-  const { userId } = req.params;
   try {
+      const { userId } = req.params;
     // 1️⃣ Try to get liked posts from Redis (full set)
     let ids = await redis.sMembers(`user:${userId}:likedPosts`);
 
@@ -88,6 +89,7 @@ async function updateUser(req, res) {
     res.status(500).json({ error: "Internal server error" });
   }
 }
+
 async function login(req, res) {
   try {
     const { username, password } = req.body;

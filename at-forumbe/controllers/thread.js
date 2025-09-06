@@ -31,6 +31,7 @@ async function getAllThreads(req, res) {
   }
 }
 
+
 async function getThreadByKeyword(req, res) {
   try {
     
@@ -82,9 +83,11 @@ async function deleteThread(req, res) {
 module.exports = {
   getAllThreads,
   getThreadByKeyword,
+  getThreadByKeyword,
   addThread,
   updateThread,
   deleteThread,
   getTopThreads,
   viewThread,
+  getTopThreads,
 };

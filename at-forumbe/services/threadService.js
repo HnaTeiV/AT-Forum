@@ -29,6 +29,7 @@ async function getThreadByKeyword(keyword) {
     return thread;
   } catch (error) {
     console.error("Error fetching thread by keyword:", error);
+    console.error("Error fetching thread by keyword:", error);
     throw error;
   }
 }
@@ -128,6 +129,7 @@ async function getTopThreads() {
 
 module.exports = {
   getAllThreads,
+  getThreadByKeyword,
   getThreadByKeyword,
   addThread,
   updateThread,

@@ -1,5 +1,6 @@
 const { json } = require("express");
 const bcrypt = require("bcrypt");
+const bcrypt = require("bcrypt");
 const User = require("../models/User");
 
 async function getAllUsers() {
@@ -30,6 +31,8 @@ async function addUser(user) {
     const bcryptPasswordHash = await bcrypt.hash(user.password, saltRounds);
 
     const newUser = new User({
+      firstName: user.firstName,
+      lastName: user.lastName,
       firstName: user.firstName,
       lastName: user.lastName,
       username: user.username,
@@ -65,11 +68,16 @@ async function updateUser(user) {
   try {
     await User.findOneAndUpdate(
       { _id: user._id },
+      { _id: user._id },
       {
         username: user.username,
         email: user.email,
         passwordHash: user.passwordHash,
         role: user.role,
+        firstName:user.fname,
+        lastName:user.lname,
+        image:user.image,
+        lastUpdated:Date.now(),
         firstName:user.fname,
         lastName:user.lname,
         image:user.image,
@@ -112,6 +120,10 @@ module.exports = {
   getAllUsers,
   getUserByUserName,
   addUser,
+  deleteUser,
+  updateUser,
+  login,
+  getProfileUser,
   deleteUser,
   updateUser,
   login,

@@ -60,6 +60,7 @@ async function updatePost(post) {
         updateAt: new Date(),
         isDeleted: post.isDeleted || false,
         likes: post.likes || 0,
+        likes: post.likes || 0,
       },
       { new: true }
     ).then((updatedPost) => {
